@@ -5,7 +5,7 @@
     <!--
      | POM Relationships
 	-->
-    <groupId>com.pbz4esilv</groupId>
+    <groupId>edu.insightr</groupId>
     <artifactId>GildedRoseJavaKata</artifactId>
     <version>0.1</version>
 

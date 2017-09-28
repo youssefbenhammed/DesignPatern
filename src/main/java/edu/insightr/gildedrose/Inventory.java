@@ -1,4 +1,4 @@
-package com.pbz4esilv.gildedrose;
+package edu.insightr.gildedrose;
 
 public class Inventory {
 

@@ -7,7 +7,5 @@ target
 .svn
 APDescription.txt
 MTPs-*.*
-pom.xml.*
 release.properties
 .DS_Store
-src/test/

@@ -22,6 +22,15 @@ public class Inventory {
 
     }
 
+    public void printInventory() {
+        System.out.println("***************");
+        for (Item item : items) {
+            System.out.println(item);
+        }
+        System.out.println("***************");
+        System.out.println("\n");
+    }
+
     public void updateQuality() {
         for (int i = 0; i < items.length; i++) {
             if (items[i].getName() != "Aged Brie"
@@ -72,6 +81,14 @@ public class Inventory {
                     }
                 }
             }
+        }
+    }
+
+    public static void main(String[] args) {
+        Inventory inventory = new Inventory();
+        for (int i = 0; i < 5; i++) {
+            inventory.updateQuality();
+            inventory.printInventory();
         }
     }
 }

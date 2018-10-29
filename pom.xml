@@ -19,6 +19,27 @@
     <properties/>
 
     <dependencies>
+
+        <dependency>
+            <groupId>io.cucumber</groupId>
+            <artifactId>cucumber-java</artifactId>
+            <version>3.0.2</version>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>io.cucumber</groupId>
+            <artifactId>cucumber-junit</artifactId>
+            <version>3.0.2</version>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>3.8.1</version>
+            <scope>test</scope>
+        </dependency>
     </dependencies>
 
     <build>
@@ -38,9 +59,9 @@
     </build>
 
     <scm>
-        <connection>scm:git:https://github.com/PBZ-InsightR/GildedRoseJavaKata.git</connection>
-        <developerConnection>scm:git:https://github.com/PBZ-InsightR/GildedRoseJavaKata.git</developerConnection>
-        <url>https://github.com/PBZ-InsightR/GildedRoseJavaKata</url>
+        <connection>scm:git:https://github.com/youssefbenhammed/DesignPatern.git</connection>
+        <developerConnection>scm:git:https://github.com/youssefbenhammed/DesignPatern.git</developerConnection>
+        <url>https://github.com/youssefbenhammed/DesignPatern.git</url>
     </scm>
 
     <repositories/>

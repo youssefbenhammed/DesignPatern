@@ -1,10 +1,15 @@
 package edu.insightr.gildedrose;
 
 
-import junit.framework.TestCase;
 
-public class InventoryTest extends TestCase {
 
+import org.junit.jupiter.api.Test;
+
+import static junit.framework.Assert.assertEquals;
+
+public class InventoryTest  {
+
+    @Test
     public void testDexterityVestQuality() {//OK
         Item dexterityVest= new Item("+5 Dexterity Vest",10,20);
         Item dexterityVest_altered = new Item("+5 Dexterity Vest",-1,20);
@@ -20,6 +25,7 @@ public class InventoryTest extends TestCase {
         assertEquals("La qualité doit etre supérieur ou égale a 0 ",0,inventaire.getItems()[2].getQuality());
     }
 
+    @Test
     public void testAgedBrieQuality()
     {
         Item AgedBrie_SellinP =new Item("Aged Brie", 1, 0);
@@ -41,6 +47,7 @@ public class InventoryTest extends TestCase {
         assertEquals("La qualité maximum d'un Aged Brie est de 50",50,inventaire.getItems()[4].getQuality());
     }
 
+    @Test
     public void testElixirMongooseQuality()
     {
 
@@ -58,6 +65,7 @@ public class InventoryTest extends TestCase {
         assertEquals("La qualité d'un Elixir Mangoose doit être diminué de 2 si il a un sell in < 0",5,inventaire.getItems()[2].getQuality());
     }
 
+    @Test
     public void testSulfurasQuality()
     {
         Item[] listeItems = new Item[]{new Item("Sulfuras, Hand of Ragnaros", 0, 80)};
@@ -69,6 +77,7 @@ public class InventoryTest extends TestCase {
         assertEquals("La qualité d'un Sulfuras ne change jamais",80,inventaire.getItems()[0].getQuality());
     }
 
+    @Test
     public void testBackstageQuality()
     {
 
@@ -110,6 +119,7 @@ public class InventoryTest extends TestCase {
         //new Item("Backstage passes to a TAFKAL80ETC concert", 15, 20),
     }
 
+    @Test
     public void testConjuredManaCakeQuality()
     {
         Item[] listeItems = new Item[]{new Item("Conjured Mana Cake", -1, 6),

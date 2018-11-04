@@ -16,7 +16,7 @@ public class InventoryTest  {
         Item[] listeItems = new Item[]{dexterityVest,dexterityVest_altered,dexterityVest_SellinN_Quality0};
         Inventory inventaire = new Inventory(listeItems);
 
-        inventaire.updateQuality();
+       inventaire.accept(inventaire.getVisitor());
 
         assertEquals("La qualité doit être décrémenté de 1 pour \"+5 Dexterity Vest\" si sellin >0",19,inventaire.getItems()[0].getQuality());
         assertEquals("la qualité doit etre décrémenté de 2 pour +5 Dexterity Vest si sllin<=0",18,inventaire.getItems()[1].getQuality());
@@ -36,7 +36,8 @@ public class InventoryTest  {
                 new Item("Aged Brie", -2, -6)};
         Inventory inventaire=new Inventory(listeItems);
 
-        inventaire.updateQuality();
+        inventaire.accept(inventaire.getVisitor());
+
 
         assertEquals("La qualité d'un Aged Brie doit être augmenté de 1 si il a un sell in > 0",1,inventaire.getItems()[0].getQuality());
         assertEquals("La qualité d'un Aged Brie doit être augmenté de 2 si il a un sell in = 0",6,inventaire.getItems()[1].getQuality());
@@ -56,7 +57,8 @@ public class InventoryTest  {
         Item[] listeItems = new Item[]{ElixirMongoose_SellInP,ElixirMongoose_SellIn0,ElixirMongoose_SellInN};
         Inventory inventaire=new Inventory(listeItems);
 
-        inventaire.updateQuality();
+        inventaire.accept(inventaire.getVisitor());
+
 
         assertEquals("La qualité d'un Elixir Mangoose doit être diminué de 1 si il a un sell in > 0",6,inventaire.getItems()[0].getQuality());
         assertEquals("La qualité d'un Elixir Mangoose doit être diminué de 2 si il a un sell in = 0",5,inventaire.getItems()[1].getQuality());
@@ -70,7 +72,8 @@ public class InventoryTest  {
         Inventory inventaire=new Inventory(listeItems);
 
 
-        inventaire.updateQuality();
+        inventaire.accept(inventaire.getVisitor());
+
 
         assertEquals("La qualité d'un Sulfuras ne change jamais",80,inventaire.getItems()[0].getQuality());
     }
@@ -96,7 +99,8 @@ public class InventoryTest  {
         Inventory inventaire=new Inventory(listeItems);
 
 
-        inventaire.updateQuality();
+        inventaire.accept(inventaire.getVisitor());
+
         inventaire.printInventory();
 
 
@@ -113,8 +117,6 @@ public class InventoryTest  {
         assertEquals("La qualité d'un Backstage passes to a TAFKAL80ETC concert paugmente de 2 si SellIn =10",22,inventaire.getItems()[10].getQuality());
         assertEquals("La qualité d'un Backstage passes to a TAFKAL80ETC concert augmente de 1 si SellIn >10",21,inventaire.getItems()[11].getQuality());
         assertEquals("La qualité maximum d'un Backstage passes to a TAFKAL80ETC concert est de 50",50,inventaire.getItems()[12].getQuality());
-
-        //new Item("Backstage passes to a TAFKAL80ETC concert", 15, 20),
     }
 
     @Test
@@ -128,7 +130,8 @@ public class InventoryTest  {
         Inventory inventaire=new Inventory(listeItems);
 
 
-        inventaire.updateQuality();
+        inventaire.accept(inventaire.getVisitor());
+
         inventaire.printInventory();
 
         assertEquals("",2,inventaire.getItems()[0].getQuality());

@@ -1,11 +1,9 @@
 package edu.insightr.gildedrose;
 
-
-
-
 import org.junit.jupiter.api.Test;
 
-import static junit.framework.Assert.assertEquals;
+import static org.junit.Assert.assertEquals;
+
 
 public class InventoryTest  {
 

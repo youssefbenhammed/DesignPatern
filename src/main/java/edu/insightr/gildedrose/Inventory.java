@@ -2,7 +2,7 @@ package edu.insightr.gildedrose;
 
 
 public class Inventory {
-
+    // TODO (PBZ) : indent your code to increase readability
 
 
 
@@ -44,6 +44,7 @@ public class Inventory {
 
     public void updateQuality()
     {
+        // TODO (PBZ) read and correct warnings when possible
        for(int i=0;i<items.length;i++)
        {
            //Switch structure

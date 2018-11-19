@@ -17,12 +17,14 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 public class Controller implements Initializable {
+    // TODO (PBZ) : dont forget to indent your code
     private Inventory inventory=new Inventory();
 
     @FXML private TableView<Item> tableView;
     @FXML private TableColumn<Item, String> name;
     @FXML private TableColumn<Item, String> sellIn;
     @FXML private TableColumn<Item, String> quality;
+    // TODO (PBZ) : It doesnt respect the java namming convention
     @FXML private ComboBox Object_name;
     @FXML private TextField SellIn;
     @FXML private TextField Quality;

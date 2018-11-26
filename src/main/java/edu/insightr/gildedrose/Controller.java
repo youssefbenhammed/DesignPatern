@@ -5,6 +5,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.chart.PieChart;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -27,6 +28,8 @@ public class Controller implements Initializable {
 
     @FXML FileChooser fileChooser = new FileChooser();
 
+    @FXML private PieChart pieChart;
+
     @FXML private TableView<Item> tableView;
     @FXML private TableColumn<Item, String> name;
     @FXML private TableColumn<Item, String> sellIn;
@@ -36,8 +39,11 @@ public class Controller implements Initializable {
     @FXML private TextField SellIn;
     @FXML private TextField Quality;
 
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+
+
 
         name.setCellValueFactory(new PropertyValueFactory<Item, String>("name"));
         sellIn.setCellValueFactory(new PropertyValueFactory<Item, String>("sellIn"));
@@ -45,6 +51,20 @@ public class Controller implements Initializable {
         fileChooser.setTitle("Import Json File");
 
         tableView.getItems().setAll(inventory.getItems());
+
+
+        ObservableList<PieChart.Data> pieChartData =
+                FXCollections.observableArrayList(
+                        new PieChart.Data("+5 Dexterity Vest", inventory.count()[0]),
+                        new PieChart.Data("Aged Brie", inventory.count()[1]),
+                        new PieChart.Data("Elixir of the Mongoose", inventory.count()[2]),
+                        new PieChart.Data("Sulfuras, Hand of Ragnaros", inventory.count()[3]),
+                        new PieChart.Data("Backstage passes to a TAFKAL80ETC concert", inventory.count()[4]),
+                        new PieChart.Data("Conjured Mana Cake", inventory.count()[5]));
+
+        pieChart.setLabelsVisible(false);
+        pieChart.setTitle("Inventory");
+        pieChart.setData(pieChartData);
 
         List<String> gvalues = new ArrayList<String>();
         gvalues.add("+5 Dexterity Vest");
@@ -87,6 +107,16 @@ public class Controller implements Initializable {
 
         inventory=new Inventory(items);
 
+        ObservableList<PieChart.Data> pieChartData =
+                FXCollections.observableArrayList(
+                        new PieChart.Data("+5 Dexterity Vest", inventory.count()[0]),
+                        new PieChart.Data("Aged Brie", inventory.count()[1]),
+                        new PieChart.Data("Elixir of the Mongoose", inventory.count()[2]),
+                        new PieChart.Data("Sulfuras, Hand of Ragnaros", inventory.count()[3]),
+                        new PieChart.Data("Backstage passes to a TAFKAL80ETC concert", inventory.count()[4]),
+                        new PieChart.Data("Conjured Mana Cake", inventory.count()[5]));
+        pieChart.setData(pieChartData);
+
         tableView.getItems().setAll(inventory.getItems());
         tableView.getItems();
         tableView.refresh();
@@ -123,6 +153,16 @@ public class Controller implements Initializable {
             Inventory importedInventory =(Inventory) gson.fromJson(jsonContent,Inventory.class);
             inventory.setItems(importedInventory.getItems());
             inventory.printInventory();
+
+            ObservableList<PieChart.Data> pieChartData =
+                    FXCollections.observableArrayList(
+                            new PieChart.Data("+5 Dexterity Vest", inventory.count()[0]),
+                            new PieChart.Data("Aged Brie", inventory.count()[1]),
+                            new PieChart.Data("Elixir of the Mongoose", inventory.count()[2]),
+                            new PieChart.Data("Sulfuras, Hand of Ragnaros", inventory.count()[3]),
+                            new PieChart.Data("Backstage passes to a TAFKAL80ETC concert", inventory.count()[4]),
+                            new PieChart.Data("Conjured Mana Cake", inventory.count()[5]));
+            pieChart.setData(pieChartData);
 
             tableView.getItems().setAll(inventory.getItems());
             tableView.getItems();

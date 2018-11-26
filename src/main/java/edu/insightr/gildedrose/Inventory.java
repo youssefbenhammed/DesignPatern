@@ -243,6 +243,37 @@ public class Inventory {
         }
     }
 
+    public int[] count()
+    {
+        int[] result={0,0,0,0,0,0};
+        for (Item i:items) {
+            switch (i.getName()) {
+                case "Conjured Mana Cake":
+                    result[5]+=1;
+                    break;
+
+                case "+5 Dexterity Vest":
+                    result[0]+=1;
+                    break;
+
+                case "Aged Brie":
+                    result[1]+=1;
+                    break;
+
+                case "Elixir of the Mongoose":
+                    result[2]+=1;
+                    break;
+
+                case "Sulfuras, Hand of Ragnaros":
+                    result[3]+=1;
+                    break;
+                case "Backstage passes to a TAFKAL80ETC concert":
+                    result[4]+=1;
+                    break;
+            }
+        }
+        return result;
+    }
     public static void main(String[] args) {
         Inventory inventory = new Inventory();
         for (int i = 0; i <20; i++) {

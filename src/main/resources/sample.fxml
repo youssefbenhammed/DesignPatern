@@ -45,5 +45,6 @@
         <TextField fx:id="Quality" promptText="Qlty"
                    prefWidth="40"/>
         <Button text="Add" onAction="#add"/>
+        <Button text="Import" onAction="#import_"/>
     </HBox>
 </GridPane>

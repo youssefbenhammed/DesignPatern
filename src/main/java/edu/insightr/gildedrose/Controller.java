@@ -10,7 +10,11 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.text.Text;
+import javafx.stage.*;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
@@ -19,6 +23,8 @@ import java.util.ResourceBundle;
 public class Controller implements Initializable {
     // TODO (PBZ) : dont forget to indent your code
     private Inventory inventory=new Inventory();
+
+    @FXML FileChooser fileChooser = new FileChooser();
 
     @FXML private TableView<Item> tableView;
     @FXML private TableColumn<Item, String> name;
@@ -35,6 +41,7 @@ public class Controller implements Initializable {
         name.setCellValueFactory(new PropertyValueFactory<Item, String>("name"));
         sellIn.setCellValueFactory(new PropertyValueFactory<Item, String>("sellIn"));
         quality.setCellValueFactory(new PropertyValueFactory<Item, String>("quality"));
+        fileChooser.setTitle("Import Json File");
 
         tableView.getItems().setAll(inventory.getItems());
 
@@ -84,6 +91,35 @@ public class Controller implements Initializable {
         tableView.refresh();
     }
 
+    @FXML
+    protected void import_(ActionEvent event)
+    {
+        String jsonContent ="";
+        Stage stage = new Stage();
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Open Json File");
+        fileChooser.setInitialDirectory(new File(System.getProperty("user.home"))
+        );
+        fileChooser.getExtensionFilters().addAll(
+                new FileChooser.ExtensionFilter("Json", "*.json")
+        );
+        File file = fileChooser.showSaveDialog(stage);
+        System.out.println(file);
+
+        try
+        {
+            BufferedReader br = new BufferedReader(new FileReader(file));
+            String st;
+            while ((st = br.readLine()) != null)
+            {
+                jsonContent=jsonContent+st;
+            }
+    }
+        catch(Exception e)
+        {
+            System.out.println(e);
+        }
+    }
 
 
 }

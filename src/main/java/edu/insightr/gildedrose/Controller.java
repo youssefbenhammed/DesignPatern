@@ -1,4 +1,5 @@
 package edu.insightr.gildedrose;
+import com.google.gson.Gson;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -94,9 +95,13 @@ public class Controller implements Initializable {
     @FXML
     protected void import_(ActionEvent event)
     {
+        //TODO Modifier lors du choix du fichier "Enregistrer" en "Ouvrir"
+        Gson gson = new Gson();
+
         String jsonContent ="";
         Stage stage = new Stage();
         FileChooser fileChooser = new FileChooser();
+
         fileChooser.setTitle("Open Json File");
         fileChooser.setInitialDirectory(new File(System.getProperty("user.home"))
         );
@@ -104,17 +109,25 @@ public class Controller implements Initializable {
                 new FileChooser.ExtensionFilter("Json", "*.json")
         );
         File file = fileChooser.showSaveDialog(stage);
-        System.out.println(file);
+
 
         try
         {
             BufferedReader br = new BufferedReader(new FileReader(file));
             String st;
-            while ((st = br.readLine()) != null)
+            while ((st = br.readLine())!=null)
             {
                 jsonContent=jsonContent+st;
             }
-    }
+
+            Inventory importedInventory =(Inventory) gson.fromJson(jsonContent,Inventory.class);
+            inventory.setItems(importedInventory.getItems());
+            inventory.printInventory();
+
+            tableView.getItems().setAll(inventory.getItems());
+            tableView.getItems();
+            tableView.refresh();
+        }
         catch(Exception e)
         {
             System.out.println(e);

@@ -36,14 +36,14 @@
     </HBox>
     <HBox spacing="10" alignment="bottom_right" GridPane.columnIndex="0"
           GridPane.rowIndex="2">
-        <ComboBox fx:id="Object_name">
+        <ComboBox fx:id="object_name">
             <items>
                 <FXCollections fx:factory="observableArrayList"/>
             </items>
         </ComboBox>
-        <TextField fx:id="SellIn" promptText="SellIn"
+        <TextField fx:id="sell_In" promptText="SellIn"
                    prefWidth="40"/>
-        <TextField fx:id="Quality" promptText="Qlty"
+        <TextField fx:id="quality_" promptText="Qlty"
                    prefWidth="40"/>
         <Button text="Add" onAction="#add"/>
         <Button text="Import" onAction="#import_"/>

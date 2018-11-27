@@ -1,17 +1,22 @@
 package edu.insightr.gildedrose;
 
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.util.Calendar;
+
 public class Item {
 
     private String name;
     private int sellIn;
-
     private int quality;
+    private LocalDate date;
 
     public Item(String name, int sellIn, int quality) {
         super();
         this.name = name;
         this.sellIn = sellIn;
         this.quality = quality;
+        this.date = LocalDate.now();
     }
 
     public String getName() {

@@ -5,7 +5,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.chart.PieChart;
+import javafx.scene.chart.*;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -27,7 +27,7 @@ public class Controller implements Initializable {
     @FXML FileChooser fileChooser = new FileChooser();
 
     @FXML private PieChart pieChart;
-
+    @FXML private BarChart barChart;
     @FXML private TableView<Item> tableView;
     @FXML private TableColumn<Item, String> name;
     @FXML private TableColumn<Item, String> sellIn;
@@ -39,7 +39,6 @@ public class Controller implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-
 
 
         name.setCellValueFactory(new PropertyValueFactory<>("name"));
@@ -72,6 +71,25 @@ public class Controller implements Initializable {
         gvalues.add("Conjured Mana Cake");
         ObservableList<String> names = FXCollections.observableArrayList(gvalues);
         object_name.setItems(names);
+
+
+        CategoryAxis xAxis = new CategoryAxis();
+        NumberAxis yAxis = new NumberAxis();
+        barChart = new BarChart<>(xAxis,yAxis);
+        barChart.setTitle("Barchart");
+        xAxis.setLabel("SellIn");
+        yAxis.setLabel("Number of items");
+
+        XYChart.Series series = new XYChart.Series();
+        series.setName("items");
+        series.getData().add(new XYChart.Data("+5 Dexterity Vest", inventory.count()[0]));
+        series.getData().add(new XYChart.Data("Aged Brie", inventory.count()[1]));
+        series.getData().add(new XYChart.Data("Elixir of the Mongoose", inventory.count()[2]));
+        series.getData().add(new XYChart.Data("Sulfuras, Hand of Ragnaros", inventory.count()[3]));
+        series.getData().add(new XYChart.Data("Backstage passes to a TAFKAL80ETC concert", inventory.count()[4]));
+        series.getData().add(new XYChart.Data("Conjured Mana Cake", inventory.count()[5]));
+
+        barChart.getData().add(series);
     }
 
     @FXML

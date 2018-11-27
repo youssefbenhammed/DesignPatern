@@ -2,8 +2,6 @@ package edu.insightr.gildedrose;
 
 
 public class Inventory {
-    // TODO (PBZ) : indent your code to increase readability
-
 
 
     private Item[] items;
@@ -12,7 +10,7 @@ public class Inventory {
         return items;
     }
 
-    public void setItems(Item[] items) {this.items = items;}
+    public void setItems(Item[] items) { this.items = items; }
 
 
     public Inventory(Item[] items) {
@@ -30,7 +28,6 @@ public class Inventory {
                 new Item("Backstage passes to a TAFKAL80ETC concert", 15, 20),
                 new Item("Conjured Mana Cake", 3, 6)
         };
-
     }
 
     public void printInventory() {
@@ -44,35 +41,34 @@ public class Inventory {
 
     public void updateQuality()
     {
-        // TODO (PBZ) read and correct warnings when possible
-       for(int i=0;i<items.length;i++)
+       for(Item i : items)
        {
            //Switch structure
-           switch (items[i].getName())
+           switch (i.getName())
            {
                case "Conjured Mana Cake":
-                    items[i].setQuality(updateConjuredManaCakeQuality(items[i]));
-                    items[i].setSellIn(items[i].getSellIn()-1);
+                    i.setQuality(updateConjuredManaCakeQuality(i));
+                    i.setSellIn(i.getSellIn() - 1);
                     break;
 
                case "+5 Dexterity Vest":
-                    items[i].setQuality(updateDexterityVestQuality(items[i]));
-                    items[i].setSellIn(items[i].getSellIn()-1);
+                    i.setQuality(updateDexterityVestQuality(i));
+                    i.setSellIn(i.getSellIn() - 1);
                     break;
 
                case "Aged Brie":
-                   items[i].setQuality(updateAgedBrieQuality(items[i]));
-                   items[i].setSellIn(items[i].getSellIn()-1);
+                   i.setQuality(updateAgedBrieQuality(i));
+                   i.setSellIn(i.getSellIn() - 1);
                    break;
 
                case "Elixir of the Mongoose":
-                   items[i].setQuality(updateElixirMongooseQuality(items[i]));
-                   items[i].setSellIn(items[i].getSellIn()-1);
+                   i.setQuality(updateElixirMongooseQuality(i));
+                   i.setSellIn(i.getSellIn() - 1);
                    break;
 
                case "Backstage passes to a TAFKAL80ETC concert":
-                   items[i].setQuality(updateBackstageQuality(items[i]));
-                   items[i].setSellIn(items[i].getSellIn()-1);
+                   i.setQuality(updateBackstageQuality(i));
+                   i.setSellIn(i.getSellIn() - 1);
                    break;
            }
        }
@@ -84,17 +80,17 @@ public class Inventory {
         int quality = object.getQuality();
         int sellIn = object.getSellIn();
 
-        if(sellIn>0)
+        if(sellIn > 0)
         {
-            quality=quality-1;
+            quality = quality - 1;
         }
         else
         {
-            quality=quality-2;
+            quality = quality - 2;
         }
-        if(quality<0)
+        if(quality < 0)
         {
-            quality=0;
+            quality = 0;
         }
 
         return quality;
@@ -103,28 +99,28 @@ public class Inventory {
     public int updateBackstageQuality(Item object) //Test : Fail
     {
         int quality = object.getQuality();
-        int sellIn= object.getSellIn();
+        int sellIn = object.getSellIn();
 
-        if(sellIn==0)
+        if(sellIn == 0)
         {
-            quality=0;
+            quality = 0;
         }
-        else if(sellIn<=5)
+        else if(sellIn <= 5)
         {
-            quality=quality+3;
+            quality = quality + 3;
         }
-        else if(sellIn<=10)
+        else if(sellIn <= 10)
         {
-            quality=quality+2;
+            quality = quality + 2;
         }
         else
         {
-            quality=quality+1;
+            quality = quality + 1;
         }
 
-        if(quality>50)
+        if(quality > 50)
         {
-            quality=50;
+            quality = 50;
         }
 
         return quality;
@@ -135,56 +131,56 @@ public class Inventory {
         int quality = object.getQuality();
         int sellIn = object.getSellIn();
 
-        if(sellIn>0)
+        if(sellIn > 0)
         {
-            quality=quality+1;
+            quality = quality + 1;
         }
         else
         {
-            quality=quality+2;
+            quality = quality + 2;
         }
-        if(quality>50)
+        if(quality > 50)
         {
-            quality=50;
+            quality = 50;
         }
         return quality;
     }
 
     public int updateDexterityVestQuality(Item object) //Test : OK
     {
-        int quality=object.getQuality();
-        int sellIn=object.getSellIn();
+        int quality = object.getQuality();
+        int sellIn = object.getSellIn();
 
-        if(sellIn>0)
+        if(sellIn > 0)
         {
-            quality=quality-1;
+            quality = quality - 1;
         }
         else
         {
-            quality=quality-2;
+            quality = quality - 2;
         }
-        if(quality<0)
+        if(quality < 0)
         {
-            quality=0;
+            quality = 0;
         }
         return quality;
     }
 
     public int updateConjuredManaCakeQuality(Item object) //Test : OK
     {
-        int quality=object.getQuality();
-        int sellIn=object.getSellIn();
-        if(sellIn>0)
+        int quality = object.getQuality();
+        int sellIn = object.getSellIn();
+        if(sellIn > 0)
         {
-            quality=quality-2;
+            quality = quality - 2;
         }
         else
         {
-            quality=quality-4;
+            quality = quality - 4;
         }
-        if(quality<0)
+        if(quality < 0)
         {
-            quality=0;
+            quality = 0;
         }
         return quality;
 
@@ -243,9 +239,40 @@ public class Inventory {
         }
     }
 
+    public int[] count()
+    {
+        int[] result = {0, 0, 0, 0, 0, 0};
+        for (Item i : items) {
+            switch (i.getName()) {
+                case "Conjured Mana Cake":
+                    result[5] += 1;
+                    break;
+
+                case "+5 Dexterity Vest":
+                    result[0] += 1;
+                    break;
+
+                case "Aged Brie":
+                    result[1] += 1;
+                    break;
+
+                case "Elixir of the Mongoose":
+                    result[2] += 1;
+                    break;
+
+                case "Sulfuras, Hand of Ragnaros":
+                    result[3] += 1;
+                    break;
+                case "Backstage passes to a TAFKAL80ETC concert":
+                    result[4] += 1;
+                    break;
+            }
+        }
+        return result;
+    }
     public static void main(String[] args) {
         Inventory inventory = new Inventory();
-        for (int i = 0; i <20; i++) {
+        for (int i = 0; i < 20; i++) {
             inventory.oldUpdateQuality();
             inventory.printInventory();
         }

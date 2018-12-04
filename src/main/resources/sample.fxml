@@ -64,19 +64,12 @@
     </HBox>
 
 
-    <AnchorPane prefHeight="393.0" prefWidth="419.0" GridPane.columnIndex="2"
-                GridPane.rowIndex="1" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+
+    <HBox GridPane.columnIndex="2" GridPane.rowIndex="1" fx:id="barChart_">
         <children>
-            <BarChart fx:id="barChart" layoutX="-40.0" layoutY="-3.0" prefHeight="205.0" prefWidth="409.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0">
-                <xAxis>
-                    <CategoryAxis fx:id="yAxis" side="BOTTOM" />
-                </xAxis>
-                <yAxis>
-                    <NumberAxis side="LEFT" fx:id="xAxis" />
-                </yAxis>
-            </BarChart>
+
         </children>
-    </AnchorPane>
+    </HBox>
 
 
 </GridPane>

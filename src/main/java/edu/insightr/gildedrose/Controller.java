@@ -11,6 +11,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.HBox;
 import javafx.stage.*;
 
 import java.io.BufferedReader;
@@ -18,16 +19,19 @@ import java.io.File;
 import java.io.FileReader;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.ResourceBundle;
 
 public class Controller implements Initializable {
+    public CategoryAxis xAxis;
+    public NumberAxis yAxis;
     private Inventory inventory = new Inventory();
 
     @FXML FileChooser fileChooser = new FileChooser();
 
     @FXML private PieChart pieChart;
-    @FXML private BarChart barChart;
+    @FXML private BarChart<String,Number> barChart;
     @FXML private TableView<Item> tableView;
     @FXML private TableColumn<Item, String> name;
     @FXML private TableColumn<Item, String> sellIn;
@@ -35,6 +39,7 @@ public class Controller implements Initializable {
     @FXML private ComboBox object_name;
     @FXML private TextField sell_In;
     @FXML private TextField quality_;
+    @FXML private HBox barChart_;
 
 
     @Override
@@ -51,12 +56,12 @@ public class Controller implements Initializable {
 
         ObservableList<PieChart.Data> pieChartData =
                 FXCollections.observableArrayList(
-                        new PieChart.Data("+5 Dexterity Vest", inventory.count()[0]),
-                        new PieChart.Data("Aged Brie", inventory.count()[1]),
-                        new PieChart.Data("Elixir of the Mongoose", inventory.count()[2]),
-                        new PieChart.Data("Sulfuras, Hand of Ragnaros", inventory.count()[3]),
-                        new PieChart.Data("Backstage passes to a TAFKAL80ETC concert", inventory.count()[4]),
-                        new PieChart.Data("Conjured Mana Cake", inventory.count()[5]));
+                        new PieChart.Data("+5 Dexterity Vest", inventory.Count()[0]),
+                        new PieChart.Data("Aged Brie", inventory.Count()[1]),
+                        new PieChart.Data("Elixir of the Mongoose", inventory.Count()[2]),
+                        new PieChart.Data("Sulfuras, Hand of Ragnaros", inventory.Count()[3]),
+                        new PieChart.Data("Backstage passes to a TAFKAL80ETC concert", inventory.Count()[4]),
+                        new PieChart.Data("Conjured Mana Cake", inventory.Count()[5]));
 
         pieChart.setLabelsVisible(false);
         pieChart.setTitle("Inventory");
@@ -73,29 +78,49 @@ public class Controller implements Initializable {
         object_name.setItems(names);
 
 
-        CategoryAxis xAxis = new CategoryAxis();
-        NumberAxis yAxis = new NumberAxis();
-        barChart = new BarChart<>(xAxis,yAxis);
-        barChart.setTitle("Barchart");
+        xAxis = new CategoryAxis();
+        xAxis.setCategories(FXCollections.<String>observableArrayList(Arrays.asList("1", "2", "3", "4", "5", "6")));
         xAxis.setLabel("SellIn");
-        yAxis.setLabel("Number of items");
 
-        XYChart.Series series = new XYChart.Series();
+        yAxis = new NumberAxis("Number of items", 0.0d, 10.0d, 1.0d);
+
+        barChart = new BarChart<>(xAxis,yAxis);
+        barChart.setTitle("Number of items in function of the Sellin");
+
+        XYChart.Series<String,Number> series = new XYChart.Series<String,Number>();
         series.setName("items");
-        series.getData().add(new XYChart.Data(inventory.getItems()[0].getSellIn(), inventory.count()[0]));
-        series.getData().add(new XYChart.Data(inventory.getItems()[1].getSellIn(), inventory.count()[1]));
-        series.getData().add(new XYChart.Data(inventory.getItems()[2].getSellIn(), inventory.count()[2]));
-        series.getData().add(new XYChart.Data(inventory.getItems()[3].getSellIn(), inventory.count()[3]));
-        series.getData().add(new XYChart.Data(inventory.getItems()[4].getSellIn(), inventory.count()[4]));
-        series.getData().add(new XYChart.Data(inventory.getItems()[5].getSellIn(), inventory.count()[5]));
 
-        barChart.getData().add(series);
+        series.getData().add(new XYChart.Data<>("1", inventory.CountNbrSellIn()[0]));
+        series.getData().add(new XYChart.Data<>("2", inventory.CountNbrSellIn()[1]));
+        series.getData().add(new XYChart.Data<>("3", inventory.CountNbrSellIn()[2]));
+        series.getData().add(new XYChart.Data<>("4", inventory.CountNbrSellIn()[3]));
+        series.getData().add(new XYChart.Data<>("5", inventory.CountNbrSellIn()[4]));
+        series.getData().add(new XYChart.Data<>("6", inventory.CountNbrSellIn()[5]));
+        series.getData().add(new XYChart.Data<>("6", inventory.CountNbrSellIn()[6]));
+        barChart.getData().addAll(series);
+
+/*
+        ObservableList<BarChart.Series> barChartData = FXCollections.observableArrayList(
+                new BarChart.Series("Lemons", FXCollections.observableArrayList(
+                        new BarChart.Data("1", 2559),
+                        new BarChart.Data("2", 956),
+                        new BarChart.Data("3", 1984)
+                )),
+                new BarChart.Series("Oranges", FXCollections.observableArrayList(
+                        new BarChart.Data("1", 2774),
+                        new BarChart.Data("2", 1154),
+                        new BarChart.Data("3", 1927)
+                ))
+        );
+        barChart = new BarChart(xAxis, yAxis, barChartData, 25.0d);
+        */
+        barChart_.getChildren().add(barChart);
     }
 
     @FXML
     protected void update() {
 
-        inventory.updateQuality();
+        inventory.UpdateQuality();
         tableView.refresh();
     }
 
@@ -124,12 +149,12 @@ public class Controller implements Initializable {
 
         ObservableList<PieChart.Data> pieChartData =
                 FXCollections.observableArrayList(
-                        new PieChart.Data("+5 Dexterity Vest", inventory.count()[0]),
-                        new PieChart.Data("Aged Brie", inventory.count()[1]),
-                        new PieChart.Data("Elixir of the Mongoose", inventory.count()[2]),
-                        new PieChart.Data("Sulfuras, Hand of Ragnaros", inventory.count()[3]),
-                        new PieChart.Data("Backstage passes to a TAFKAL80ETC concert", inventory.count()[4]),
-                        new PieChart.Data("Conjured Mana Cake", inventory.count()[5]));
+                        new PieChart.Data("+5 Dexterity Vest", inventory.Count()[0]),
+                        new PieChart.Data("Aged Brie", inventory.Count()[1]),
+                        new PieChart.Data("Elixir of the Mongoose", inventory.Count()[2]),
+                        new PieChart.Data("Sulfuras, Hand of Ragnaros", inventory.Count()[3]),
+                        new PieChart.Data("Backstage passes to a TAFKAL80ETC concert", inventory.Count()[4]),
+                        new PieChart.Data("Conjured Mana Cake", inventory.Count()[5]));
         pieChart.setData(pieChartData);
 
         tableView.getItems().setAll(inventory.getItems());
@@ -166,16 +191,16 @@ public class Controller implements Initializable {
 
             Inventory importedInventory = gson.fromJson(jsonContent,Inventory.class);
             inventory.setItems(importedInventory.getItems());
-            inventory.printInventory();
+            inventory.PrintInventory();
 
             ObservableList<PieChart.Data> pieChartData =
                     FXCollections.observableArrayList(
-                            new PieChart.Data("+5 Dexterity Vest", inventory.count()[0]),
-                            new PieChart.Data("Aged Brie", inventory.count()[1]),
-                            new PieChart.Data("Elixir of the Mongoose", inventory.count()[2]),
-                            new PieChart.Data("Sulfuras, Hand of Ragnaros", inventory.count()[3]),
-                            new PieChart.Data("Backstage passes to a TAFKAL80ETC concert", inventory.count()[4]),
-                            new PieChart.Data("Conjured Mana Cake", inventory.count()[5]));
+                            new PieChart.Data("+5 Dexterity Vest", inventory.Count()[0]),
+                            new PieChart.Data("Aged Brie", inventory.Count()[1]),
+                            new PieChart.Data("Elixir of the Mongoose", inventory.Count()[2]),
+                            new PieChart.Data("Sulfuras, Hand of Ragnaros", inventory.Count()[3]),
+                            new PieChart.Data("Backstage passes to a TAFKAL80ETC concert", inventory.Count()[4]),
+                            new PieChart.Data("Conjured Mana Cake", inventory.Count()[5]));
             pieChart.setData(pieChartData);
 
             tableView.getItems().setAll(inventory.getItems());
@@ -187,6 +212,4 @@ public class Controller implements Initializable {
             System.out.println(e);
         }
     }
-
-
 }

@@ -82,12 +82,12 @@ public class Controller implements Initializable {
 
         XYChart.Series series = new XYChart.Series();
         series.setName("items");
-        series.getData().add(new XYChart.Data("+5 Dexterity Vest", inventory.count()[0]));
-        series.getData().add(new XYChart.Data("Aged Brie", inventory.count()[1]));
-        series.getData().add(new XYChart.Data("Elixir of the Mongoose", inventory.count()[2]));
-        series.getData().add(new XYChart.Data("Sulfuras, Hand of Ragnaros", inventory.count()[3]));
-        series.getData().add(new XYChart.Data("Backstage passes to a TAFKAL80ETC concert", inventory.count()[4]));
-        series.getData().add(new XYChart.Data("Conjured Mana Cake", inventory.count()[5]));
+        series.getData().add(new XYChart.Data(inventory.getItems()[0].getSellIn(), inventory.count()[0]));
+        series.getData().add(new XYChart.Data(inventory.getItems()[1].getSellIn(), inventory.count()[1]));
+        series.getData().add(new XYChart.Data(inventory.getItems()[2].getSellIn(), inventory.count()[2]));
+        series.getData().add(new XYChart.Data(inventory.getItems()[3].getSellIn(), inventory.count()[3]));
+        series.getData().add(new XYChart.Data(inventory.getItems()[4].getSellIn(), inventory.count()[4]));
+        series.getData().add(new XYChart.Data(inventory.getItems()[5].getSellIn(), inventory.count()[5]));
 
         barChart.getData().add(series);
     }

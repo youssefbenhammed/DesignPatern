@@ -1,8 +1,6 @@
 package edu.insightr.gildedrose;
 
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
-import java.util.Calendar;
 
 public class Item {
 
@@ -43,6 +41,9 @@ public class Item {
         this.quality = quality;
     }
 
+    public LocalDate getDate() { return date; }
+
+
     @Override
     public String toString() {
         return "Item{" +
@@ -50,5 +51,9 @@ public class Item {
                 ", sellIn=" + sellIn +
                 ", quality=" + quality +
                 '}';
+    }
+
+    public void setDate(LocalDate date) {
+        this.date = date;
     }
 }

@@ -1,6 +1,10 @@
 package edu.insightr.gildedrose;
 
 
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
+
 public class Inventory {
 
 
@@ -30,7 +34,7 @@ public class Inventory {
         };
     }
 
-    public void PrintInventory() {
+    public void printInventory() {
         System.out.println("***************");
         for (Item item : items) {
             System.out.println(item);
@@ -39,7 +43,7 @@ public class Inventory {
         System.out.println("\n");
     }
 
-    public void UpdateQuality()
+    public void updateQuality()
     {
        for(Item i : items)
        {
@@ -47,27 +51,27 @@ public class Inventory {
            switch (i.getName())
            {
                case "Conjured Mana Cake":
-                    i.setQuality(UpdateConjuredManaCakeQuality(i));
+                    i.setQuality(updateConjuredManaCakeQuality(i));
                     i.setSellIn(i.getSellIn() - 1);
                     break;
 
                case "+5 Dexterity Vest":
-                    i.setQuality(UpdateDexterityVestQuality(i));
+                    i.setQuality(updateDexterityVestQuality(i));
                     i.setSellIn(i.getSellIn() - 1);
                     break;
 
                case "Aged Brie":
-                   i.setQuality(UpdateAgedBrieQuality(i));
+                   i.setQuality(updateAgedBrieQuality(i));
                    i.setSellIn(i.getSellIn() - 1);
                    break;
 
                case "Elixir of the Mongoose":
-                   i.setQuality(UpdateElixirMongooseQuality(i));
+                   i.setQuality(updateElixirMongooseQuality(i));
                    i.setSellIn(i.getSellIn() - 1);
                    break;
 
                case "Backstage passes to a TAFKAL80ETC concert":
-                   i.setQuality(UpdateBackstageQuality(i));
+                   i.setQuality(updateBackstageQuality(i));
                    i.setSellIn(i.getSellIn() - 1);
                    break;
            }
@@ -75,7 +79,7 @@ public class Inventory {
     }
 
 
-    public int UpdateElixirMongooseQuality(Item object) //Test : OK
+    public int updateElixirMongooseQuality(Item object) //Test : OK
     {
         int quality = object.getQuality();
         int sellIn = object.getSellIn();
@@ -96,7 +100,7 @@ public class Inventory {
         return quality;
     }
 
-    public int UpdateBackstageQuality(Item object) //Test : Fail
+    public int updateBackstageQuality(Item object) //Test : Fail
     {
         int quality = object.getQuality();
         int sellIn = object.getSellIn();
@@ -126,7 +130,7 @@ public class Inventory {
         return quality;
     }
 
-    public int UpdateAgedBrieQuality(Item object) //Test : OK
+    public int updateAgedBrieQuality(Item object) //Test : OK
     {
         int quality = object.getQuality();
         int sellIn = object.getSellIn();
@@ -146,7 +150,7 @@ public class Inventory {
         return quality;
     }
 
-    public int UpdateDexterityVestQuality(Item object) //Test : OK
+    public int updateDexterityVestQuality(Item object) //Test : OK
     {
         int quality = object.getQuality();
         int sellIn = object.getSellIn();
@@ -166,7 +170,7 @@ public class Inventory {
         return quality;
     }
 
-    public int UpdateConjuredManaCakeQuality(Item object) //Test : OK
+    public int updateConjuredManaCakeQuality(Item object) //Test : OK
     {
         int quality = object.getQuality();
         int sellIn = object.getSellIn();
@@ -186,7 +190,40 @@ public class Inventory {
 
     }
 
-    public int[] CountNbrSellIn()
+    public List<LocalDate> creationDates()
+    {
+        List<LocalDate> dates = new ArrayList<>();
+        for (Item i : items) {
+            if(!exists(dates, i.getDate()))
+                dates.add(i.getDate());
+        }
+        return dates;
+    }
+
+    public int[] countDates()
+    {
+        List<LocalDate> dates = creationDates();
+        int[] count = {0, 0, 0, 0, 0, 0, 0};
+        for (Item i : items) {
+            LocalDate d = i.getDate();
+            count[dates.indexOf(d)] += 1;
+        }
+        return count;
+    }
+
+    public boolean exists(List<LocalDate> dates, LocalDate date)
+    {
+        if(dates == null)
+            return false;
+
+        for (LocalDate d : dates) {
+            if(date == d)
+                return true;
+        }
+        return false;
+    }
+
+    public int[] countNbrSellIn()
     {
         int[] result = {0, 0, 0, 0, 0, 0, 0};
         for (Item i : items) {
@@ -219,10 +256,9 @@ public class Inventory {
             }
         }
         return result;
-
     }
 
-    public int[] Count()
+    public int[] count()
     {
         int[] result = {0, 0, 0, 0, 0, 0};
         for (Item i : items) {
@@ -256,8 +292,8 @@ public class Inventory {
     public static void main(String[] args) {
         Inventory inventory = new Inventory();
         for (int i = 0; i < 20; i++) {
-            inventory.UpdateQuality();
-            inventory.PrintInventory();
+            inventory.updateQuality();
+            inventory.printInventory();
         }
     }
 }

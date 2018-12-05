@@ -26,7 +26,7 @@ public class CucumberSteps {
     @When("I update the inventory")
     public void i_update_the_inventory()
     {
-        inventory.UpdateQuality();
+        inventory.updateQuality();
     }
 
     @Then("the quality of the conjured item is 4")

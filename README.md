@@ -1,5 +1,8 @@
 # GildedRoseJavaKata
-The Gilded Rose Kata in Java
+BEN HAMMED Youssef
+AMAR Ruben
+CHAUDRON Alexandre
+BOTELLA Théo 
 
 
 # Original Description of the Gilded Rose

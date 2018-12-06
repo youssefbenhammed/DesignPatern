@@ -1,6 +1,10 @@
 package edu.insightr.gildedrose;
 
 
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
+
 public class Inventory {
 
 
@@ -186,57 +190,72 @@ public class Inventory {
 
     }
 
-    public void oldUpdateQuality() {
-        for (int i = 0; i < items.length; i++) {
-            if (items[i].getName() != "Aged Brie"
-                    && items[i].getName() != "Backstage passes to a TAFKAL80ETC concert") {
-                if (items[i].getQuality() > 0) {
-                    if (items[i].getName() != "Sulfuras, Hand of Ragnaros") {
-                        items[i].setQuality(items[i].getQuality() - 1);
-                    }
-                }
-            } else {
-                if (items[i].getQuality() < 50) {
-                    items[i].setQuality(items[i].getQuality() + 1);
+    public List<LocalDate> creationDates()
+    {
+        List<LocalDate> dates = new ArrayList<>();
+        for (Item i : items) {
+            if(!exists(dates, i.getDate()))
+                dates.add(i.getDate());
+        }
+        return dates;
+    }
 
-                    if (items[i].getName() == "Backstage passes to a TAFKAL80ETC concert") {
-                        if (items[i].getSellIn() < 11) {
-                            if (items[i].getQuality() < 50) {
-                                items[i].setQuality(items[i].getQuality() + 1);
-                            }
-                        }
+    public int[] countDates()
+    {
+        List<LocalDate> dates = creationDates();
+        int[] count = {0, 0, 0, 0, 0, 0, 0};
+        for (Item i : items) {
+            LocalDate d = i.getDate();
+            count[dates.indexOf(d)] += 1;
+        }
+        return count;
+    }
 
-                        if (items[i].getSellIn() < 6) {
-                            if (items[i].getQuality() < 50) {
-                                items[i].setQuality(items[i].getQuality() + 1);
-                            }
-                        }
-                    }
-                }
-            }
+    public boolean exists(List<LocalDate> dates, LocalDate date)
+    {
+        if(dates == null)
+            return false;
 
-            if (items[i].getName() != "Sulfuras, Hand of Ragnaros") {
-                items[i].setSellIn(items[i].getSellIn() - 1);
-            }
+        for (LocalDate d : dates) {
+            if(date == d)
+                return true;
+        }
+        return false;
+    }
 
-            if (items[i].getSellIn() < 0) {
-                if (items[i].getName() != "Aged Brie") {
-                    if (items[i].getName() != "Backstage passes to a TAFKAL80ETC concert") {
-                        if (items[i].getQuality() > 0) {
-                            if (items[i].getName() != "Sulfuras, Hand of Ragnaros") {
-                                items[i].setQuality(items[i].getQuality() - 1);
-                            }
-                        }
-                    } else {
-                        items[i].setQuality(items[i].getQuality() - items[i].getQuality());
-                    }
-                } else {
-                    if (items[i].getQuality() < 50) {
-                        items[i].setQuality(items[i].getQuality() + 1);
-                    }
-                }
+    public int[] countNbrSellIn()
+    {
+        int[] result = {0, 0, 0, 0, 0, 0, 0};
+        for (Item i : items) {
+            switch (i.getSellIn()) {
+                case 0:
+                    result[0] += 1;
+                    break;
+
+                case 1:
+                    result[1] += 1;
+                    break;
+
+                case 2:
+                    result[2] += 1;
+                    break;
+
+                case 3:
+                    result[3] += 1;
+                    break;
+
+                case 4:
+                    result[4] += 1;
+                    break;
+                case 5:
+                    result[5] += 1;
+                    break;
+                case 6:
+                    result[6] += 1;
+                    break;
             }
         }
+        return result;
     }
 
     public int[] count()
@@ -273,7 +292,7 @@ public class Inventory {
     public static void main(String[] args) {
         Inventory inventory = new Inventory();
         for (int i = 0; i < 20; i++) {
-            inventory.oldUpdateQuality();
+            inventory.updateQuality();
             inventory.printInventory();
         }
     }

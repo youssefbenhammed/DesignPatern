@@ -1,17 +1,20 @@
 package edu.insightr.gildedrose;
 
+import java.time.LocalDate;
+
 public class Item {
 
     private String name;
     private int sellIn;
-
     private int quality;
+    private LocalDate date;
 
     public Item(String name, int sellIn, int quality) {
         super();
         this.name = name;
         this.sellIn = sellIn;
         this.quality = quality;
+        this.date = LocalDate.now();
     }
 
     public String getName() {
@@ -38,6 +41,9 @@ public class Item {
         this.quality = quality;
     }
 
+    public LocalDate getDate() { return date; }
+
+
     @Override
     public String toString() {
         return "Item{" +
@@ -45,5 +51,9 @@ public class Item {
                 ", sellIn=" + sellIn +
                 ", quality=" + quality +
                 '}';
+    }
+
+    public void setDate(LocalDate date) {
+        this.date = date;
     }
 }

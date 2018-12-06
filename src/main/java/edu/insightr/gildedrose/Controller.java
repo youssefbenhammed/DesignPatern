@@ -107,16 +107,16 @@ public class Controller implements Initializable {
         barChart_.getChildren().add(barChart);
 
 
-   /*     xAxis2 = new CategoryAxis();
+        xAxis2 = new CategoryAxis();
         xAxis2.setLabel("Creation date");
 
         yAxis2 = new NumberAxis("Number of items", 0.0d, 10.0d, 1.0d);
 
-        barChart2 = new BarChart<>(xAxis,yAxis);
+        barChart2 = new BarChart<>(xAxis2,yAxis2);
         barChart2.setTitle("Number of items in function of the creation date");
 
         XYChart.Series<String,Number> series2 = new XYChart.Series<String,Number>();
-        series.setName("items");
+        series2.setName("items");
 
         List<LocalDate> dates = inventory.creationDates();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd LLLL yyyy");
@@ -128,7 +128,7 @@ public class Controller implements Initializable {
         }
         barChart2.getData().addAll(series2);
 
-        barChart2_.getChildren().add(barChart2); */
+        barChart2_.getChildren().add(barChart2);
     }
 
     @FXML

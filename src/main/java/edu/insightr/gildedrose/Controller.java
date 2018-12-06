@@ -25,13 +25,9 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 public class Controller implements Initializable {
-    public CategoryAxis xAxis;
-    public NumberAxis yAxis;
-    public CategoryAxis xAxis2;
-    public NumberAxis yAxis2;
     private Inventory inventory = new Inventory();
 
-    @FXML FileChooser fileChooser = new FileChooser();
+    @FXML private FileChooser fileChooser = new FileChooser();
 
     @FXML private PieChart pieChart;
     @FXML private BarChart<String,Number> barChart;
@@ -50,7 +46,6 @@ public class Controller implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
-
         name.setCellValueFactory(new PropertyValueFactory<>("name"));
         sellIn.setCellValueFactory(new PropertyValueFactory<>("sellIn"));
         quality.setCellValueFactory(new PropertyValueFactory<>("quality"));
@@ -58,19 +53,8 @@ public class Controller implements Initializable {
 
         tableView.getItems().setAll(inventory.getItems());
 
-
-        ObservableList<PieChart.Data> pieChartData =
-                FXCollections.observableArrayList(
-                        new PieChart.Data("+5 Dexterity Vest", inventory.count()[0]),
-                        new PieChart.Data("Aged Brie", inventory.count()[1]),
-                        new PieChart.Data("Elixir of the Mongoose", inventory.count()[2]),
-                        new PieChart.Data("Sulfuras, Hand of Ragnaros", inventory.count()[3]),
-                        new PieChart.Data("Backstage passes to a TAFKAL80ETC concert", inventory.count()[4]),
-                        new PieChart.Data("Conjured Mana Cake", inventory.count()[5]));
-
         pieChart.setLabelsVisible(false);
         pieChart.setTitle("Inventory");
-        pieChart.setData(pieChartData);
 
         List<String> gvalues = new ArrayList<>();
         gvalues.add("+5 Dexterity Vest");
@@ -83,52 +67,26 @@ public class Controller implements Initializable {
         object_name.setItems(names);
 
 
-        xAxis = new CategoryAxis();
-        xAxis.setCategories(FXCollections.<String>observableArrayList(Arrays.asList("1", "2", "3", "4", "5", "6")));
+        CategoryAxis xAxis = new CategoryAxis();
+        xAxis.setCategories(FXCollections.<String>observableArrayList(Arrays.asList("1", "2", "3", "4", "5", "6", "7", "8", "9", "10")));
         xAxis.setLabel("SellIn");
 
-        yAxis = new NumberAxis("Number of items", 0.0d, 10.0d, 1.0d);
+        NumberAxis yAxis = new NumberAxis("Number of items", 0, 5, 1);
 
         barChart = new BarChart<>(xAxis,yAxis);
         barChart.setTitle("Number of items in function of the Sellin");
 
-        XYChart.Series<String,Number> series = new XYChart.Series<String,Number>();
-        series.setName("items");
-
-        series.getData().add(new XYChart.Data<>("0", inventory.countNbrSellIn()[0]));
-        series.getData().add(new XYChart.Data<>("1", inventory.countNbrSellIn()[1]));
-        series.getData().add(new XYChart.Data<>("2", inventory.countNbrSellIn()[2]));
-        series.getData().add(new XYChart.Data<>("3", inventory.countNbrSellIn()[3]));
-        series.getData().add(new XYChart.Data<>("4", inventory.countNbrSellIn()[4]));
-        series.getData().add(new XYChart.Data<>("5", inventory.countNbrSellIn()[5]));
-        series.getData().add(new XYChart.Data<>("6", inventory.countNbrSellIn()[6]));
-        barChart.getData().addAll(series);
-
-        barChart_.getChildren().add(barChart);
 
 
-        xAxis2 = new CategoryAxis();
+        CategoryAxis xAxis2 = new CategoryAxis();
         xAxis2.setLabel("Creation date");
 
-        yAxis2 = new NumberAxis("Number of items", 0.0d, 10.0d, 1.0d);
+        NumberAxis yAxis2 = new NumberAxis("Number of items", 0, 5, 1);
 
         barChart2 = new BarChart<>(xAxis2,yAxis2);
         barChart2.setTitle("Number of items in function of the creation date");
 
-        XYChart.Series<String,Number> series2 = new XYChart.Series<String,Number>();
-        series2.setName("items");
-
-        List<LocalDate> dates = inventory.creationDates();
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd LLLL yyyy");
-        int i = 0;
-        for (LocalDate d : dates) {
-            String formattedDate = d.format(formatter);
-            series2.getData().add(new XYChart.Data<>(formattedDate, inventory.countDates()[i]));
-            i++;
-        }
-        barChart2.getData().addAll(series2);
-
-        barChart2_.getChildren().add(barChart2);
+        updateCharts();
     }
 
     @FXML
@@ -136,6 +94,7 @@ public class Controller implements Initializable {
 
         inventory.updateQuality();
         tableView.refresh();
+        updateCharts();
     }
 
     @FXML
@@ -161,6 +120,15 @@ public class Controller implements Initializable {
 
         inventory = new Inventory(items);
 
+        updateCharts();
+
+        tableView.getItems().setAll(inventory.getItems());
+        tableView.getItems();
+        tableView.refresh();
+    }
+
+    private void updateCharts()
+    {
         ObservableList<PieChart.Data> pieChartData =
                 FXCollections.observableArrayList(
                         new PieChart.Data("+5 Dexterity Vest", inventory.count()[0]),
@@ -171,9 +139,42 @@ public class Controller implements Initializable {
                         new PieChart.Data("Conjured Mana Cake", inventory.count()[5]));
         pieChart.setData(pieChartData);
 
-        tableView.getItems().setAll(inventory.getItems());
-        tableView.getItems();
-        tableView.refresh();
+        barChart.getData().clear();
+
+        XYChart.Series<String,Number> series = new XYChart.Series<>();
+        series.setName("items");
+
+        series.getData().add(new XYChart.Data<>("0", inventory.countNbrSellIn()[0]));
+        series.getData().add(new XYChart.Data<>("1", inventory.countNbrSellIn()[1]));
+        series.getData().add(new XYChart.Data<>("2", inventory.countNbrSellIn()[2]));
+        series.getData().add(new XYChart.Data<>("3", inventory.countNbrSellIn()[3]));
+        series.getData().add(new XYChart.Data<>("4", inventory.countNbrSellIn()[4]));
+        series.getData().add(new XYChart.Data<>("5", inventory.countNbrSellIn()[5]));
+        series.getData().add(new XYChart.Data<>("6", inventory.countNbrSellIn()[6]));
+        series.getData().add(new XYChart.Data<>("7", inventory.countNbrSellIn()[7]));
+        series.getData().add(new XYChart.Data<>("8", inventory.countNbrSellIn()[8]));
+        series.getData().add(new XYChart.Data<>("9", inventory.countNbrSellIn()[9]));
+        series.getData().add(new XYChart.Data<>("10", inventory.countNbrSellIn()[10]));
+
+        barChart.getData().addAll(series);
+
+        barChart_.getChildren().add(barChart);
+
+
+        barChart2.getData().clear();
+
+        XYChart.Series<String,Number> series2 = new XYChart.Series<>();
+        series2.setName("items");
+
+        List<LocalDate> dates = inventory.creationDates();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd LLLL yyyy");
+        for (LocalDate d : dates) {
+            String formattedDate = d.format(formatter);
+            series2.getData().add(new XYChart.Data<>(formattedDate, inventory.countDates()[dates.indexOf(d)]));
+        }
+        barChart2.getData().addAll(series2);
+
+        barChart2_.getChildren().add(barChart2);
     }
 
     @FXML

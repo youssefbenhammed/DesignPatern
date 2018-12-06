@@ -32,6 +32,13 @@ public class Inventory {
                 new Item("Backstage passes to a TAFKAL80ETC concert", 15, 20),
                 new Item("Conjured Mana Cake", 3, 6)
         };
+        items[0].setDate(LocalDate.of(2018, 12, 1));
+        items[1].setDate(LocalDate.of(2018, 12, 1));
+        items[2].setDate(LocalDate.of(2018, 12, 2));
+        items[3].setDate(LocalDate.of(2018, 12, 3));
+        items[4].setDate(LocalDate.of(2018, 12, 3));
+        items[5].setDate(LocalDate.of(2018, 12, 3));
+
     }
 
     public void printInventory() {
@@ -225,7 +232,7 @@ public class Inventory {
 
     public int[] countNbrSellIn()
     {
-        int[] result = {0, 0, 0, 0, 0, 0, 0};
+        int[] result = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
         for (Item i : items) {
             switch (i.getSellIn()) {
                 case 0:
@@ -253,6 +260,19 @@ public class Inventory {
                 case 6:
                     result[6] += 1;
                     break;
+                case 7:
+                    result[7] += 1;
+                    break;
+                case 8:
+                    result[8] += 1;
+                    break;
+                case 9:
+                    result[9] += 1;
+                    break;
+                case 10:
+                    result[10] += 1;
+                    break;
+
             }
         }
         return result;
@@ -282,6 +302,7 @@ public class Inventory {
                 case "Sulfuras, Hand of Ragnaros":
                     result[3] += 1;
                     break;
+
                 case "Backstage passes to a TAFKAL80ETC concert":
                     result[4] += 1;
                     break;

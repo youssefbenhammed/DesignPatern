@@ -65,13 +65,13 @@
 
 
 
-    <HBox GridPane.columnIndex="2" GridPane.rowIndex="1" fx:id="barChart_">
+    <HBox GridPane.columnIndex="0" GridPane.rowIndex="4" fx:id="barChart_">
         <children>
 
         </children>
     </HBox>
 
-    <HBox GridPane.columnIndex="3" GridPane.rowIndex="1" fx:id="barChart2_">
+    <HBox GridPane.columnIndex="1" GridPane.rowIndex="4" fx:id="barChart2_">
         <children>
 
         </children>

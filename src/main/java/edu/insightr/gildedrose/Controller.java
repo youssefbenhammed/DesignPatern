@@ -5,10 +5,7 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.chart.*;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.HBox;
 import javafx.stage.*;
@@ -36,6 +33,9 @@ public class Controller implements Initializable {
     @FXML private TableColumn<Item, String> name;
     @FXML private TableColumn<Item, String> sellIn;
     @FXML private TableColumn<Item, String> quality;
+    @FXML private TableColumn<Item, Button> price;
+    @FXML private TableColumn<Item, String> sell;
+
     @FXML private ComboBox object_name;
     @FXML private TextField sell_In;
     @FXML private TextField quality_;
@@ -49,6 +49,8 @@ public class Controller implements Initializable {
         name.setCellValueFactory(new PropertyValueFactory<>("name"));
         sellIn.setCellValueFactory(new PropertyValueFactory<>("sellIn"));
         quality.setCellValueFactory(new PropertyValueFactory<>("quality"));
+        sell.setCellValueFactory(new PropertyValueFactory<>("sell"));
+
         fileChooser.setTitle("Import Json File");
 
         tableView.getItems().setAll(inventory.getItems());

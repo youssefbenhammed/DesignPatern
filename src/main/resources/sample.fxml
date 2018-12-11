@@ -33,6 +33,10 @@
             </TableColumn>
             <TableColumn fx:id="quality" text="Quality">
             </TableColumn>
+            <TableColumn fx:id="price" text="Price">
+            </TableColumn>
+            <TableColumn fx:id="sell" text="Sell">
+            </TableColumn>
         </columns>
     </TableView>
     <HBox spacing="10" alignment="bottom_right" GridPane.columnIndex="0">

@@ -144,13 +144,14 @@ public class Controller implements Initializable {
         XYChart.Series<String,Number> series = new XYChart.Series<>();
         series.setName("items");
 
-        for(int i = 0; i < 10; i++)
+        for(int i = 0; i < 11; i++)
         {
             series.getData().add(new XYChart.Data<>("" + i + "", inventory.countNbrSellIn()[i]));
         }
 
         barChart.getData().addAll(series);
 
+        barChart_.getChildren().clear();
         barChart_.getChildren().add(barChart);
 
 
@@ -167,6 +168,7 @@ public class Controller implements Initializable {
         }
         barChart2.getData().addAll(series2);
 
+        barChart2_.getChildren().clear();
         barChart2_.getChildren().add(barChart2);
     }
 

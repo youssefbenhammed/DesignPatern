@@ -232,7 +232,7 @@ public class Inventory {
 
     public int[] countNbrSellIn()
     {
-        int[] result = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+        int[] result = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
         for (Item i : items) {
             switch (i.getSellIn()) {
                 case 0:
@@ -272,7 +272,9 @@ public class Inventory {
                 case 10:
                     result[10] += 1;
                     break;
-
+                case 11:
+                    result[11] += 1;
+                    break;
             }
         }
         return result;

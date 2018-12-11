@@ -9,6 +9,7 @@ public class Inventory {
 
 
     private Item[] items;
+    private List<Item> soldItems;
 
     public Item[] getItems() {
         return items;
@@ -32,13 +33,14 @@ public class Inventory {
                 new Item("Backstage passes to a TAFKAL80ETC concert", 15, 20),
                 new Item("Conjured Mana Cake", 3, 6)
         };
-        items[0].setDate(LocalDate.of(2018, 12, 1));
-        items[1].setDate(LocalDate.of(2018, 12, 1));
-        items[2].setDate(LocalDate.of(2018, 12, 2));
-        items[3].setDate(LocalDate.of(2018, 12, 3));
-        items[4].setDate(LocalDate.of(2018, 12, 3));
-        items[5].setDate(LocalDate.of(2018, 12, 3));
+        items[0].setBuyingDate(LocalDate.of(2018, 12, 1));
+        items[1].setBuyingDate(LocalDate.of(2018, 12, 1));
+        items[2].setBuyingDate(LocalDate.of(2018, 12, 2));
+        items[3].setBuyingDate(LocalDate.of(2018, 12, 3));
+        items[4].setBuyingDate(LocalDate.of(2018, 12, 3));
+        items[5].setBuyingDate(LocalDate.of(2018, 12, 3));
 
+        this.soldItems = new ArrayList<>();
     }
 
     public void printInventory() {
@@ -201,8 +203,18 @@ public class Inventory {
     {
         List<LocalDate> dates = new ArrayList<>();
         for (Item i : items) {
-            if(!exists(dates, i.getDate()))
-                dates.add(i.getDate());
+            if(!exists(dates, i.getBuyingDate()))
+                dates.add(i.getBuyingDate());
+        }
+        return dates;
+    }
+
+    public List<LocalDate> sellingDates()
+    {
+        List<LocalDate> dates = new ArrayList<>();
+        for (Item i : soldItems) {
+            if(!exists(dates, i.getSellingDate()))
+                dates.add(i.getSellingDate());
         }
         return dates;
     }
@@ -212,7 +224,7 @@ public class Inventory {
         List<LocalDate> dates = creationDates();
         int[] count = {0, 0, 0, 0, 0, 0, 0};
         for (Item i : items) {
-            LocalDate d = i.getDate();
+            LocalDate d = i.getBuyingDate();
             count[dates.indexOf(d)] += 1;
         }
         return count;
@@ -228,6 +240,17 @@ public class Inventory {
                 return true;
         }
         return false;
+    }
+
+    public int[] countSellings()
+    {
+        List<LocalDate> dates = sellingDates();
+        int[] count = {0, 0, 0, 0, 0, 0, 0};
+        for (Item i : soldItems) {
+            LocalDate d = i.getSellingDate();
+            count[dates.indexOf(d)] += 1;
+        }
+        return count;
     }
 
     public int[] countNbrSellIn()

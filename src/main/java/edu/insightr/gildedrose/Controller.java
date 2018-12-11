@@ -29,6 +29,7 @@ public class Controller implements Initializable {
     @FXML private PieChart pieChart;
     @FXML private BarChart<String,Number> barChart;
     @FXML private BarChart<String,Number> barChart2;
+    @FXML private BarChart<String,Number> barChart3;
     @FXML private TableView<Item> tableView;
     @FXML private TableColumn<Item, String> name;
     @FXML private TableColumn<Item, String> sellIn;
@@ -41,6 +42,7 @@ public class Controller implements Initializable {
     @FXML private TextField quality_;
     @FXML private HBox barChart_;
     @FXML private HBox barChart2_;
+    @FXML private HBox barChart3_;
 
 
     @Override
@@ -87,6 +89,16 @@ public class Controller implements Initializable {
 
         barChart2 = new BarChart<>(xAxis2,yAxis2);
         barChart2.setTitle("Number of items in function of the creation date");
+
+
+
+        CategoryAxis xAxis3 = new CategoryAxis();
+        xAxis3.setLabel("Time");
+
+        NumberAxis yAxis3 = new NumberAxis("Number of items", 0, 5, 1);
+
+        barChart3 = new BarChart<>(xAxis3,yAxis3);
+        barChart3.setTitle("Number of items in function of the time");
 
         updateCharts();
     }
@@ -172,6 +184,30 @@ public class Controller implements Initializable {
 
         barChart2_.getChildren().clear();
         barChart2_.getChildren().add(barChart2);
+
+
+        barChart3.getData().clear();
+
+        XYChart.Series<String,Number> series3a = new XYChart.Series<>();
+        series3a.setName("number of buyings");
+
+        XYChart.Series<String,Number> series3b = new XYChart.Series<>();
+        series3b.setName("number of sellings");
+
+        for (LocalDate d : dates) {
+            String formattedDate = d.format(formatter);
+            series3a.getData().add(new XYChart.Data<>(formattedDate, inventory.countDates()[dates.indexOf(d)]));
+        }
+
+        for (LocalDate d : dates) {
+            String formattedDate = d.format(formatter);
+            series3b.getData().add(new XYChart.Data<>(formattedDate, inventory.countSellings()[dates.indexOf(d)]));
+        }
+
+        barChart3.getData().addAll(series3a, series3b);
+
+        barChart3_.getChildren().clear();
+        barChart3_.getChildren().add(barChart3);
     }
 
     @FXML

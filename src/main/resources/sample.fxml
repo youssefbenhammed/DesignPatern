@@ -81,5 +81,10 @@
         </children>
     </HBox>
 
+    <HBox GridPane.columnIndex="2" GridPane.rowIndex="4" fx:id="barChart3_">
+        <children>
+
+        </children>
+    </HBox>
 
 </GridPane>

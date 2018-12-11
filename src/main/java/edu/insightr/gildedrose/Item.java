@@ -10,7 +10,8 @@ public class Item {
     private String name;
     private int sellIn;
     private int quality;
-    private LocalDate date;
+    private LocalDate buyingDate;
+    private LocalDate sellingDate;
     @FXML
     public Button sell;
 
@@ -21,7 +22,8 @@ public class Item {
         this.quality = quality;
 
         this.sell=new Button("Sell");
-        this.date = LocalDate.now();
+        this.buyingDate = LocalDate.now();
+        this.sellingDate = null;
     }
 
     public String getName() {
@@ -48,10 +50,10 @@ public class Item {
         this.quality = quality;
     }
 
-    public LocalDate getDate() { return date; }
+    public LocalDate getBuyingDate() { return buyingDate; }
 
-    public void setDate(LocalDate date) {
-        this.date = date;
+    public void setBuyingDate(LocalDate buyingDate) {
+        this.buyingDate = buyingDate;
     }
 
     public Button getSell() {
@@ -71,4 +73,11 @@ public class Item {
                 '}';
     }
 
+    public LocalDate getSellingDate() {
+        return sellingDate;
+    }
+
+    public void setSellingDate(LocalDate sellingDate) {
+        this.sellingDate = sellingDate;
+    }
 }

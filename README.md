@@ -1,8 +1,8 @@
 # GildedRoseJavaKata
-BEN HAMMED Youssef
-AMAR Ruben
-CHAUDRON Alexandre
-BOTELLA Théo 
+- BEN HAMMED Youssef
+- AMAR Ruben
+- CHAUDRON Alexandre
+- BOTELLA Théo 
 
 
 # Original Description of the Gilded Rose

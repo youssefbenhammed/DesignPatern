@@ -144,17 +144,10 @@ public class Controller implements Initializable {
         XYChart.Series<String,Number> series = new XYChart.Series<>();
         series.setName("items");
 
-        series.getData().add(new XYChart.Data<>("0", inventory.countNbrSellIn()[0]));
-        series.getData().add(new XYChart.Data<>("1", inventory.countNbrSellIn()[1]));
-        series.getData().add(new XYChart.Data<>("2", inventory.countNbrSellIn()[2]));
-        series.getData().add(new XYChart.Data<>("3", inventory.countNbrSellIn()[3]));
-        series.getData().add(new XYChart.Data<>("4", inventory.countNbrSellIn()[4]));
-        series.getData().add(new XYChart.Data<>("5", inventory.countNbrSellIn()[5]));
-        series.getData().add(new XYChart.Data<>("6", inventory.countNbrSellIn()[6]));
-        series.getData().add(new XYChart.Data<>("7", inventory.countNbrSellIn()[7]));
-        series.getData().add(new XYChart.Data<>("8", inventory.countNbrSellIn()[8]));
-        series.getData().add(new XYChart.Data<>("9", inventory.countNbrSellIn()[9]));
-        series.getData().add(new XYChart.Data<>("10", inventory.countNbrSellIn()[10]));
+        for(int i = 0; i < 10; i++)
+        {
+            series.getData().add(new XYChart.Data<>("" + i + "", inventory.countNbrSellIn()[i]));
+        }
 
         barChart.getData().addAll(series);
 

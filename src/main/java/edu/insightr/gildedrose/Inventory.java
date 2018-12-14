@@ -9,14 +9,37 @@ public class Inventory {
 
 
     private  Item[] items;
+
+    private List<Item> buyItems;
     private  List<Item> soldItems;
 
+    private double bankBalance;
+
+
+    //GET SET :
     public Item[] getItems() {
         return items;
     }
 
     public void setItems(Item[] items) { this.items = items; }
 
+    public List<Item> getBuyItems() {
+        return buyItems;
+    }
+
+    public void setBuyItems(List<Item> buyItems) {
+        this.buyItems = buyItems;
+    }
+
+    public List<Item> getSoldItems() {
+        return soldItems;
+    }
+
+    public void setSoldItems(List<Item> soldItems) {
+        this.soldItems = soldItems;
+    }
+
+    //INITIALISATION :
 
     public Inventory(Item[] items) {
         super();
@@ -43,6 +66,8 @@ public class Inventory {
         this.soldItems = new ArrayList<>();
     }
 
+    //METHODES :
+
     public void printInventory() {
         System.out.println("***************");
         for (Item item : items) {
@@ -52,6 +77,7 @@ public class Inventory {
         System.out.println("\n");
     }
 
+    //
     public void updateQuality()
     {
        for(Item i : items)

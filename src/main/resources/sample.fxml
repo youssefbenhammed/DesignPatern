@@ -41,6 +41,7 @@
     </TableView>
     <HBox spacing="10" alignment="bottom_right" GridPane.columnIndex="0">
         <Button text="Update" onAction="#update"/>
+        <Button text="Export Balance" onAction="#exportBalance"/>
     </HBox>
     <HBox spacing="10" alignment="bottom_right" GridPane.columnIndex="0"
           GridPane.rowIndex="2">

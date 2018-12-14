@@ -14,6 +14,7 @@ import javafx.stage.*;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
+import java.io.PrintWriter;
 import java.net.URL;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -56,6 +57,7 @@ public class Controller implements Initializable {
         quality.setCellValueFactory(new PropertyValueFactory<>("quality"));
         sell.setCellValueFactory(new PropertyValueFactory<>("sell"));
         price.setCellValueFactory(new PropertyValueFactory<>("price"));
+
         for(int i=0;i<inventory.getItems().length;i++)
         {
             final int value=i;
@@ -127,6 +129,16 @@ public class Controller implements Initializable {
         updateCharts();
     }
 
+    @FXML
+    protected void exportBalance()
+    {
+        Gson gson_ = new Gson();
+        String export;
+        Item i = inventory.getItems()[0];
+        export = gson_.toJson(i);
+        System.out.println(export);
+
+    }
     @FXML
     protected void add() {
 

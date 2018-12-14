@@ -8,8 +8,8 @@ import java.util.List;
 public class Inventory {
 
 
-    private Item[] items;
-    private List<Item> soldItems;
+    private  Item[] items;
+    private  List<Item> soldItems;
 
     public Item[] getItems() {
         return items;
@@ -334,6 +334,31 @@ public class Inventory {
             }
         }
         return result;
+    }
+
+
+
+    public Item[] delet(Item item)
+    {
+        int rang=0;
+        Item[] newItems = new Item[items.length-1];
+        for(int i=0;i<items.length;i++)
+        {
+            if(items[i].isEqual(item)==1)
+            {
+                rang=i;
+            }
+        }
+        for(int i=0;i<rang;i++)
+        {
+                newItems[i]=items[i];
+        }
+        for(int i=rang+1;i<items.length;i++)
+        {
+            newItems[i-1]=items[i];
+        }
+        return newItems;
+
     }
     public static void main(String[] args) {
         Inventory inventory = new Inventory();

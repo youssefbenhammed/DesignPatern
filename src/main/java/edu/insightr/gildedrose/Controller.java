@@ -2,6 +2,7 @@ package edu.insightr.gildedrose;
 import com.google.gson.Gson;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.chart.*;
@@ -48,10 +49,25 @@ public class Controller implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
+
+        //LIST VIEW INITIALISATION :
         name.setCellValueFactory(new PropertyValueFactory<>("name"));
         sellIn.setCellValueFactory(new PropertyValueFactory<>("sellIn"));
         quality.setCellValueFactory(new PropertyValueFactory<>("quality"));
         sell.setCellValueFactory(new PropertyValueFactory<>("sell"));
+        price.setCellValueFactory(new PropertyValueFactory<>("price"));
+        for(int i=0;i<inventory.getItems().length;i++)
+        {
+            final int value=i;
+            inventory.getItems()[i].getSell().setOnAction(event->
+            {
+                inventory=new Inventory(inventory.delet(inventory.getItems()[value]));
+                tableView.getItems().setAll(inventory.getItems());
+                tableView.getItems();
+                tableView.refresh();
+                updateCharts();
+            });
+        }
 
         fileChooser.setTitle("Import Json File");
 
@@ -60,6 +76,7 @@ public class Controller implements Initializable {
         pieChart.setLabelsVisible(false);
         pieChart.setTitle("Inventory");
 
+        //ADD ITEM INITIALISATION :
         List<String> gvalues = new ArrayList<>();
         gvalues.add("+5 Dexterity Vest");
         gvalues.add("Aged Brie");
@@ -100,12 +117,11 @@ public class Controller implements Initializable {
         barChart3 = new BarChart<>(xAxis3,yAxis3);
         barChart3.setTitle("Number of items in function of the time");
 
-        updateCharts();
+       updateCharts();
     }
 
     @FXML
     protected void update() {
-
         inventory.updateQuality();
         tableView.refresh();
         updateCharts();
@@ -133,9 +149,6 @@ public class Controller implements Initializable {
         items[this.inventory.getItems().length] = addedItem;
 
         inventory = new Inventory(items);
-
-        updateCharts();
-
         tableView.getItems().setAll(inventory.getItems());
         tableView.getItems();
         tableView.refresh();
@@ -259,5 +272,9 @@ public class Controller implements Initializable {
         {
             System.out.println(e);
         }
+    }
+
+    private void delButton(ActionEvent event) {
+
     }
 }

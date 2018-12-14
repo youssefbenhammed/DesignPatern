@@ -12,8 +12,17 @@ public class Item {
     private int quality;
     private LocalDate buyingDate;
     private LocalDate sellingDate;
-    @FXML
-    public Button sell;
+    @FXML private Button sell;
+
+    public double getPrice() {
+        return price;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
+    }
+
+    private double price;
 
     public Item(String name, int sellIn, int quality) {
         super();
@@ -22,8 +31,11 @@ public class Item {
         this.quality = quality;
 
         this.sell=new Button("Sell");
+
         this.buyingDate = LocalDate.now();
         this.sellingDate = null;
+
+        this.price=sellIn*0.1+quality*2;
     }
 
     public String getName() {
@@ -79,5 +91,20 @@ public class Item {
 
     public void setSellingDate(LocalDate sellingDate) {
         this.sellingDate = sellingDate;
+    }
+
+    public int isEqual(Item item)
+    {
+
+        if(item.name.equals(name) && item.sellIn==sellIn && item.quality==quality && item.buyingDate.equals(buyingDate) )
+        {
+            return 1;
+        }
+        return 0;
+    }
+
+    public Item getItem()
+    {
+        return this;
     }
 }
